@@ -1,0 +1,50 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended", // eslint-plugin-react-hooks
+        "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "simple-import-sort"
+    ],
+    "rules": {
+        "prettier/prettier": "error",
+        "sort-imports": "off",
+        "import/order": "off",
+        "simple-import-sort/imports": "error", // imports 自动排序 eslint-plugin-simple-import-sort
+        "simple-import-sort/exports": "error", // exports 自动排序 eslint-plugin-simple-import-sort
+        "react/react-in-jsx-scope": 0, // jsx 中显示引入 React
+        "newline-after-var": 2, // 变量声明后是否需要空一行
+        "spaced-comment": 1, // 注释风格空格
+        "eqeqeq": 2, // 必须使用全等,
+        "eol-last": 2, // 文件末尾强制换行
+        "comma-dangle": [
+            2,
+            "always-multiline"
+        ], // 数组和对象键值对最后一个逗号， never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，always-multiline：多行模式必须带逗号，单行模式不能带逗号
+        "semi": [
+            2,
+            "always"
+        ], // 语句强制分号结尾
+        "quotes": [
+            1,
+            "single"
+        ] // 引号类型
+    }
+}
