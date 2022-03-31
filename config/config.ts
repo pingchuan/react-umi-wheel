@@ -16,6 +16,10 @@ export default defineConfig({
     loading: '@/components/pageLoading',
   },
   ignoreMomentLocale: true,
+  alias: {
+    config: path.resolve(__dirname, './'),
+  },
+  proxy: proxy[(REACT_APP_ENV as keyof typeof proxy) || 'dev'],
   analyze: {
     analyzerMode: 'server',
     analyzerPort: 8888,
@@ -26,8 +30,5 @@ export default defineConfig({
     logLevel: 'info',
     defaultSizes: 'parsed', // stat  // gzip
   },
-  alias: {
-    config: path.resolve(__dirname, './'),
-  },
-  proxy: proxy[(REACT_APP_ENV as keyof typeof proxy) || 'dev'],
+  // mfsu: {},
 });

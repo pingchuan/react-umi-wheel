@@ -1,0 +1,32 @@
+.container {
+  display       : flex;
+  flex-direction: column;
+  width         : 100vw;
+  height        : 100vh;
+  background    : #f0f2f5;
+
+  .header {
+    height    : 64px;
+    width     : 100%;
+    background: #222222;
+  }
+
+  .body {
+    display : flex;
+    flex    : 1;
+    overflow: auto;
+
+    .slider {
+      height    : 100%;
+      width     : auto;
+      background: #2b2b2b;
+      overflow  : auto;
+    }
+
+    .content {
+      flex    : 1;
+      height  : 100%;
+      overflow: auto;
+    }
+  }
+}

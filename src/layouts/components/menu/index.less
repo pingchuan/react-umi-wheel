@@ -1,0 +1,25 @@
+@import '~@/assets/themes/index.less';
+
+.menu {
+  width           : 200px;
+  background-color: transparent !important;
+  user-select     : none;
+
+  :global {
+    .ant-menu-sub {
+      background-color: #222222 !important;
+    }
+
+    .ant-menu-item-selected {
+      background-color: #000000 !important;
+
+      & span {
+        color: @primary-color  !important;
+      }
+    }
+
+    .ant-menu-item:hover {
+      background-color: #000000 !important;
+    }
+  }
+}

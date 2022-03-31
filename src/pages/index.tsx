@@ -1,3 +1,6 @@
+import 'antd/dist/antd.variable.min.css';
+
+import { Button, ConfigProvider } from 'antd';
 import { useSelector } from 'umi';
 
 import styles from './index.less';
@@ -9,8 +12,18 @@ export default function IndexPage() {
   console.log(app);
 
   return (
-    <div>
+    <ConfigProvider>
+      <Button
+        type="primary"
+        onClick={() => {
+          ConfigProvider.config({
+            theme: { primaryColor: 'red' },
+          });
+        }}
+      >
+        按钮
+      </Button>
       <h1 className={styles.title}>{text}</h1>
-    </div>
+    </ConfigProvider>
   );
 }
