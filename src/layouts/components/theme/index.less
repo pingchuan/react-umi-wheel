@@ -1,6 +1,4 @@
 .overlay {
-  padding: 0;
-
   :global {
     .ant-popover-inner {
       background-color: transparent;
@@ -18,12 +16,22 @@
 }
 
 .button {
-  margin-top: 16px;
+  position        : fixed;
+  right           : 32px;
+  bottom          : 32px;
+  z-index         : 2147483640;
+  width           : 44px;
+  height          : 44px;
+  line-height     : 44px;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  border-radius   : 50%;
+  color           : #2b2b2b;
+  background-color: #fff;
+  box-shadow      : 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
 }
 
 .icon {
-  position: fixed;
-  right   : 32px;
-  bottom  : 32px;
-  z-index : 2147483640;
+  font-size: 18px;
 }

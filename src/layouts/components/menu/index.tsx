@@ -1,52 +1,111 @@
-import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PieChartOutlined,
-} from '@ant-design/icons';
-import { Button, Menu as MenuAntd } from 'antd';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { Menu as MenuAntd, Skeleton } from 'antd';
+import configRoutes from 'config/router';
+import { useEffect, useState } from 'react';
+import { history, IRoute, useLocation } from 'umi';
+
+import Icon from '@/components/icon';
 
 import styles from './index.less';
 
 const { SubMenu, Item: MenuItem } = MenuAntd;
 
-const Menu = () => {
-  return (
-    <MenuAntd
-      className={styles.menu}
-      defaultSelectedKeys={['1']}
-      defaultOpenKeys={['sub1']}
-      mode="inline"
-      theme="dark"
-    >
-      <MenuItem key="1" icon={<PieChartOutlined />}>
-        Option 1
-      </MenuItem>
-      <MenuItem key="2" icon={<DesktopOutlined />}>
-        Option 2
-      </MenuItem>
-      <MenuItem key="3" icon={<ContainerOutlined />}>
-        Option 3
-      </MenuItem>
-      <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-        <MenuItem key="5">Option 5</MenuItem>
-        <MenuItem key="6">Option 6</MenuItem>
-        <MenuItem key="7">Option 7</MenuItem>
-        <MenuItem key="8">Option 8</MenuItem>
-      </SubMenu>
-      <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-        <MenuItem key="9">Option 9</MenuItem>
-        <MenuItem key="10">Option 10</MenuItem>
-        <SubMenu key="sub3" title="Submenu">
-          <MenuItem key="11">Option 11</MenuItem>
-          <MenuItem key="12">Option 12</MenuItem>
+const MenuIndex = () => {
+  const loading = false;
+  const location = useLocation();
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [collapsed, setCollapsed] = useState(false);
+
+  const formateTitle = (title: string) => {
+    if (loading) {
+      return (
+        <Skeleton.Button
+          className={styles.skeleton}
+          active
+          block
+          size="small"
+        />
+      );
+    } else {
+      return title;
+    }
+  };
+
+  const generateMeunItem = (route: IRoute) => {
+    const { title = '', path = '', icon = '', isHidden, component } = route;
+
+    if (component && !isHidden) {
+      return (
+        <MenuItem
+          key={path}
+          icon={icon && <Icon type={icon} className={styles.icon} />}
+          onClick={() => history.push(path)}
+          disabled={loading}
+        >
+          {formateTitle(title)}
+        </MenuItem>
+      );
+    } else {
+      return null;
+    }
+  };
+
+  const generateSubMenu = (route: IRoute) => {
+    const {
+      title = '',
+      path = '',
+      icon = '',
+      routes,
+      isHidden,
+      component,
+    } = route;
+
+    if (component && !isHidden) {
+      return (
+        <SubMenu
+          popupClassName={styles.popupClassName}
+          key={path}
+          title={formateTitle(title)}
+          icon={icon && <Icon type={icon} className={styles.icon} />}
+        >
+          {routes?.map(generateMeunItem)}
         </SubMenu>
-      </SubMenu>
-    </MenuAntd>
+      );
+    } else {
+      return null;
+    }
+  };
+
+  const generateMenu = (iRoute?: IRoute) => {
+    return (iRoute?.routes || []).map((route) =>
+      route.routes?.length ? generateSubMenu(route) : generateMeunItem(route),
+    );
+  };
+
+  useEffect(() => {
+    setSelectedKeys([location.pathname]);
+  }, [location]);
+
+  return (
+    <>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <MenuAntd
+            className={styles.menu}
+            mode="inline"
+            theme="dark"
+            selectedKeys={selectedKeys}
+            inlineCollapsed={collapsed}
+          >
+            {generateMenu(configRoutes.find((route) => route.path === '/'))}
+          </MenuAntd>
+        </div>
+        <div className={styles.footer} onClick={() => setCollapsed((v) => !v)}>
+          {collapsed ? <RightOutlined /> : <LeftOutlined />}
+        </div>
+      </div>
+    </>
   );
 };
 
-export default Menu;
+export default MenuIndex;

@@ -1,0 +1,53 @@
+.container {
+  height     : 64px;
+  padding    : 0 32px;
+  box-sizing : border-box;
+  display    : flex;
+  align-items: center;
+
+  .left {
+    width      : 30%;
+    font-size  : 20px;
+    font-weight: bold;
+    overflow   : hidden;
+    display    : flex;
+    align-items: center;
+
+    .logo {
+      display       : inline-block;
+      height        : 32px;
+      vertical-align: middle;
+      margin-right  : 16px;
+    }
+  }
+
+  .extend {
+    flex: 1;
+  }
+
+  .right {
+    display    : flex;
+    align-items: center;
+  }
+
+  .message {
+    font-size: 20px;
+    color    : #ffffff;
+    cursor   : pointer;
+  }
+
+  .badge {
+    cursor     : pointer;
+    user-select: none;
+  }
+
+  .avatar {
+    margin: 0 16px 0 48px;
+  }
+
+  :global {
+    .ant-badge-count {
+      box-shadow: none;
+    }
+  }
+}

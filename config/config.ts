@@ -10,6 +10,7 @@ export default defineConfig({
     type: 'none',
   },
   routes: routes,
+  dva: { hmr: true },
   fastRefresh: {},
   title: 'dmp',
   dynamicImport: {
@@ -24,11 +25,13 @@ export default defineConfig({
     analyzerMode: 'server',
     analyzerPort: 8888,
     openAnalyzer: true,
-    // generate stats file while ANALYZE_DUMP exist
     generateStatsFile: false,
     statsFilename: 'stats.json',
     logLevel: 'info',
-    defaultSizes: 'parsed', // stat  // gzip
+    defaultSizes: 'parsed',
+  },
+  theme: {
+    'root-entry-name': 'variable',
   },
   // mfsu: {},
 });
