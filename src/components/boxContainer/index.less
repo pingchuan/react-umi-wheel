@@ -1,14 +1,15 @@
-@interval: 24px;
+@import url('~@/assets/themes/index.less');
 
 .boxContainer {
   position      : relative;
-  margin        : @interval;
-  min-height    : calc(100% - @interval*2);
+  margin        : @spacing;
+  min-height    : calc(100% - @spacing*2);
   display       : flex;
   flex-direction: column;
 }
 
 .block {
-  flex      : 1;
-  background: #fff;
+  flex         : 1;
+  background   : @bg-color;
+  border-radius: 0 0 @border-radius @border-radius;
 }

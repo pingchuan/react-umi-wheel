@@ -1,15 +1,21 @@
-@import url('../boxContainer/index.less');
+@import url('~@/assets/themes/index.less');
 
 .headerSticky {
+  z-index         : 999999;
   top             : 0;
-  padding-bottom  : @interval;
+  padding-bottom  : @spacing;
   background-color: #f0f2f5;
   position        : sticky;
-  margin-top      : -@interval;
-  margin-left     : -@interval;
-  margin-right    : -@interval;
+  margin-top      : -@spacing;
+  margin-left     : -@spacing;
+  margin-right    : -@spacing;
 }
 
 .content {
   background-color: #ffffff;
+  display         : flex;
+  align-items     : center;
+  padding         : 0 @spacing;
+  height          : 48px;
+  font-size       : 16px;
 }

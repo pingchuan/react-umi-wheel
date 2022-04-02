@@ -5,7 +5,7 @@ import HeaderSticky from '@/components/headerSticky';
 
 import styles from './index.less';
 
-export default function IndexPage() {
+const Home = () => {
   const text = 'hohoho';
   const app = useSelector((state) => state.app);
 
@@ -13,9 +13,7 @@ export default function IndexPage() {
 
   return (
     <>
-      <HeaderSticky className={styles.header} noInterval noSticky>
-        header
-      </HeaderSticky>
+      <HeaderSticky>设备概览</HeaderSticky>
       <div className={styles.content}>
         {text}
         Content
@@ -64,4 +62,6 @@ export default function IndexPage() {
       </div>
     </>
   );
-}
+};
+
+export default Home;
