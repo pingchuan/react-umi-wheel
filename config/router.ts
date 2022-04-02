@@ -61,6 +61,13 @@ export default [
         component: 'home',
         icon: 'icon-xiaoxidingyue',
       },
+      {
+        title: '无包裹路由',
+        path: '/noBoxContainer',
+        component: 'home',
+        icon: 'icon-shujukanban',
+        noBoxContainer: true,
+      },
       // {
       //   title: '隐藏路由',
       //   path: '/hidden',

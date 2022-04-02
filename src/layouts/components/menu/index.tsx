@@ -1,8 +1,7 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Menu as MenuAntd, Skeleton } from 'antd';
-import configRoutes from 'config/router';
-import { useEffect, useState } from 'react';
-import { history, IRoute, useLocation } from 'umi';
+import { FC, useEffect, useState } from 'react';
+import { history, IRoute as IRouteUmi, useLocation } from 'umi';
 
 import Icon from '@/components/icon';
 
@@ -10,7 +9,16 @@ import styles from './index.less';
 
 const { SubMenu, Item: MenuItem } = MenuAntd;
 
-const MenuIndex = () => {
+export type IRoute = IRouteUmi & {
+  noBoxContainer?: boolean;
+  isHidden?: boolean;
+};
+
+interface IProps {
+  route: IRoute;
+}
+
+const MenuIndex: FC<IProps> = ({ route: routeProps }) => {
   const loading = false;
   const location = useLocation();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
@@ -76,8 +84,8 @@ const MenuIndex = () => {
     }
   };
 
-  const generateMenu = (iRoute?: IRoute) => {
-    return (iRoute?.routes || []).map((route) =>
+  const generateMenu = (route: IRoute) => {
+    return route.routes?.map((route) =>
       route.routes?.length ? generateSubMenu(route) : generateMeunItem(route),
     );
   };
@@ -97,7 +105,7 @@ const MenuIndex = () => {
             selectedKeys={selectedKeys}
             inlineCollapsed={collapsed}
           >
-            {generateMenu(configRoutes.find((route) => route.path === '/'))}
+            {generateMenu(routeProps)}
           </MenuAntd>
         </div>
         <div className={styles.footer} onClick={() => setCollapsed((v) => !v)}>

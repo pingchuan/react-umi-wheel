@@ -1,12 +1,45 @@
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
-import { ReactElement } from 'react';
+import { FC, ReactNode } from 'react';
+import { Location } from 'umi';
+
+import BoxContainer from '@/components/boxContainer';
 
 import Header from './components/header';
-import Menu from './components/menu';
+import Menu, { IRoute } from './components/menu';
 import Theme from './components/theme';
 import styles from './index.less';
-const Index = ({ children }: { children: ReactElement }) => {
+
+interface IProps {
+  children: ReactNode;
+  route: IRoute;
+  location: Location;
+}
+
+const Index: FC<IProps> = (props) => {
+  console.log(props);
+  const { route, location } = props;
+
+  const calcRoute = (route: IRoute, path: string): undefined | IRoute => {
+    if (route.path === path) {
+      return route;
+    } else if (route.routes) {
+      const findRoute = route.routes.find((item) =>
+        item.path?.startsWith(path),
+      );
+
+      if (findRoute && findRoute.path === path) {
+        return findRoute;
+      } else if (findRoute && findRoute.routes) {
+        return calcRoute(findRoute, path);
+      } else {
+        return undefined;
+      }
+    } else {
+      return undefined;
+    }
+  };
+
   return (
     <ConfigProvider locale={zhCN}>
       <section className={styles.container}>
@@ -15,9 +48,15 @@ const Index = ({ children }: { children: ReactElement }) => {
         </section>
         <section className={styles.body}>
           <section className={styles.slider}>
-            <Menu />
+            <Menu route={route} />
           </section>
-          <section className={styles.content}>{children}</section>
+          <section className={styles.content}>
+            {calcRoute(route, location.pathname)?.noBoxContainer ? (
+              props.children
+            ) : (
+              <BoxContainer>{props.children}</BoxContainer>
+            )}
+          </section>
         </section>
       </section>
       <Theme />

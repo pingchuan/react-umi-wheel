@@ -1,6 +1,8 @@
 import { Button, Pagination } from 'antd';
 import { useSelector } from 'umi';
 
+import HeaderSticky from '@/components/headerSticky';
+
 import styles from './index.less';
 
 export default function IndexPage() {
@@ -11,7 +13,10 @@ export default function IndexPage() {
 
   return (
     <>
-      <div className={styles.container}>
+      <HeaderSticky className={styles.header} noInterval noSticky>
+        header
+      </HeaderSticky>
+      <div className={styles.content}>
         {text}
         Content
         <br />
