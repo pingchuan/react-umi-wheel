@@ -16,7 +16,7 @@ export default [
       {
         title: '产品管理',
         path: '/productManagement',
-        component: 'productManagement',
+        component: 'home',
         icon: 'icon-chanpinguanli',
       },
       {
