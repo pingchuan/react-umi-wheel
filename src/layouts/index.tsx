@@ -17,7 +17,6 @@ interface IProps {
 }
 
 const Index: FC<IProps> = (props) => {
-  console.log(props);
   const { route, location } = props;
 
   const calcRoute = (route: IRoute, path: string): undefined | IRoute => {

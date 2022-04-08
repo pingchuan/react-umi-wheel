@@ -12,7 +12,7 @@ export default defineConfig({
   routes: routes,
   dva: { hmr: true },
   fastRefresh: {},
-  title: 'dmp',
+  title: 'react-umi-wheel',
   dynamicImport: {
     loading: '@/components/pageLoading',
   },
@@ -33,5 +33,5 @@ export default defineConfig({
   theme: {
     'root-entry-name': 'variable',
   },
-  // mfsu: {},
+  mfsu: {},
 });
