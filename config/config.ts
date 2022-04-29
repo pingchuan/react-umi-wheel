@@ -33,5 +33,17 @@ export default defineConfig({
   theme: {
     'root-entry-name': 'variable',
   },
+  chainWebpack(config) {
+    config.optimization.splitChunks({
+      cacheGroups: {
+        antdVendor: {
+          test: /[\\/]node_modules[\\/](antd)[\\/]/,
+          name: 'antdVendor',
+          priority: 20,
+        },
+      },
+    });
+  },
+  chunks: ['antdVendor'],
   mfsu: {},
 });
