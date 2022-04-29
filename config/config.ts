@@ -44,6 +44,6 @@ export default defineConfig({
       },
     });
   },
-  chunks: ['antdVendor'],
+  chunks: ['antdVendor', 'umi'],
   mfsu: {},
 });
